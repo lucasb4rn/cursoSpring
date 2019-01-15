@@ -1,5 +1,6 @@
 package br.com.lucas.cursomc.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import br.com.lucas.cursomc.domain.Categoria;
 import br.com.lucas.cursomc.repository.CategoriaRepository;
 import br.com.lucas.cursomc.service.exception.ObjectNotFoundException;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class CategoriaService {
@@ -44,6 +44,12 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possivel excluir uma categoria que possui produtos");
 		}
+	}
+	
+	
+	public List<Categoria> findAll() {
+		return repo.findAll();
+		
 	}
 
 }
