@@ -1,5 +1,6 @@
 package br.com.lucas.cursomc.security;
 
+
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +18,13 @@ public class JWTUtil {
 	
 	
 	@Value("${jwt.expiration}")
-	private String expiration;
+	private long expiration;
 	
 	public String generateToken(String username) {
 		
-		return Jwts.builder()
+		Date data = new Date(System.currentTimeMillis() + expiration);
+		
+			return Jwts.builder()
 				.setSubject(username)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
